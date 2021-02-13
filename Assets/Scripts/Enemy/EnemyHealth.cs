@@ -19,11 +19,13 @@ public class EnemyHealth : MonoBehaviour
 
     void Awake ()
     {
+        // Mendapatkan reference component
         anim = GetComponent <Animator> ();
         enemyAudio = GetComponent <AudioSource> ();
         hitParticles = GetComponentInChildren <ParticleSystem> ();
         capsuleCollider = GetComponent <CapsuleCollider> ();
 
+        // Set current health
         currentHealth = startingHealth;
     }
 
@@ -32,6 +34,7 @@ public class EnemyHealth : MonoBehaviour
     {
         if (isSinking)
         {
+            // memindahkan object ke bawah
             transform.Translate (-Vector3.up * sinkSpeed * Time.deltaTime);
         }
     }
@@ -71,10 +74,13 @@ public class EnemyHealth : MonoBehaviour
 
     public void StartSinking ()
     {
+        // Disable NavMesh component
         GetComponent<UnityEngine.AI.NavMeshAgent> ().enabled = false;
+
+        // Set Rigidbody ke kinematic
         GetComponent<Rigidbody> ().isKinematic = true;
         isSinking = true;
-        //ScoreManager.score += scoreValue;
+        ScoreManager.score += scoreValue;
         Destroy (gameObject, 2f);
     }
 }
