@@ -10,7 +10,7 @@ public class EnemyAttack : MonoBehaviour
     Animator anim;
     GameObject player;
     PlayerHealth playerHealth;
-    EnemyHealth enemyHealth;s
+    EnemyHealth enemyHealth;
     bool playerInRange;
     float timer;
 
@@ -19,9 +19,9 @@ public class EnemyAttack : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag ("Player");
         playerHealth = player.GetComponent <PlayerHealth> ();
+        anim = GetComponent <Animator> ();
         // Mendapatkan Enemy health
         enemyHealth = GetComponent<EnemyHealth>();
-        anim = GetComponent <Animator> ();
     }
 
     // Callback jika ada suatu object masuk ke dalam trigger
@@ -35,7 +35,7 @@ public class EnemyAttack : MonoBehaviour
     }
 
     // Callback jika ada object yang keluar dari trigger
-    void OnTriggerExit (Collider other)
+    void OnTriggerExit(Collider other)
     {
         if(other.gameObject == player)
         {
@@ -44,30 +44,30 @@ public class EnemyAttack : MonoBehaviour
     }
 
 
-    void Update ()
+    void Update()
     {
         timer += Time.deltaTime;
 
         if(timer >= timeBetweenAttacks && playerInRange && enemyHealth.currentHealth > 0)
         {
-            Attack ();
+            Attack();
         }
 
         if (playerHealth.currentHealth <= 0)
         {
-            anim.SetTrigger ("PlayerDead");
+            anim.SetTrigger("PlayerDead");
         }
     }
 
 
-    void Attack ()
+    void Attack()
     {
         timer = 0f;
 
         // Taking damage
         if (playerHealth.currentHealth > 0)
         {
-            playerHealth.TakeDamage (attackDamage);
+            playerHealth.TakeDamage(attackDamage);
         }
     }
 }

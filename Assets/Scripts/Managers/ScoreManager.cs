@@ -12,7 +12,7 @@ public class ScoreManager : MonoBehaviour
 
     void Awake ()
     {
-        text = GetComponent <Text> ();
+        text = GetComponent<Text>();
         score = 0;
     }
 
