@@ -27,16 +27,18 @@ public class EnemyAttack : MonoBehaviour
     // Callback jika ada suatu object masuk ke dalam trigger
     void OnTriggerEnter (Collider other)
     {
+        // Set player in range
         if (other.gameObject == player && other.isTrigger == false)
         {
             playerInRange = true;
+            
         }
     }
 
     // Callback jika ada object yang keluar dari trigger
     void OnTriggerExit(Collider other)
     {
-        if(other.gameObject == player)
+        if(other.gameObject == player && other.isTrigger == false)
         {
             playerInRange = false;
         }

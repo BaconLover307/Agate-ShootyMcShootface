@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using UnityEngine.SceneManagement;
+
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -17,8 +19,8 @@ public class PlayerHealth : MonoBehaviour
     AudioSource playerAudio;
     PlayerMovement playerMovement;
     PlayerShooting playerShooting;
-    bool isDead;                                                
-    bool damaged;                                               
+    bool isDead;
+    bool damaged;
 
 
     void Awake()
@@ -27,7 +29,7 @@ public class PlayerHealth : MonoBehaviour
         anim = GetComponent<Animator>();
         playerAudio = GetComponent<AudioSource>();
         playerMovement = GetComponent<PlayerMovement>();
-        
+
         playerShooting = GetComponentInChildren<PlayerShooting>();
         currentHealth = startingHealth;
     }
@@ -85,6 +87,6 @@ public class PlayerHealth : MonoBehaviour
     public void RestartLevel()
     {
         //meload ulang scene dengan index 0 pada build setting
-        //SceneManager.LoadScene(0);
+        SceneManager.LoadScene(0);
     }
 }

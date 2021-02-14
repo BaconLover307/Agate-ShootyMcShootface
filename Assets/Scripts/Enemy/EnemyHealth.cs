@@ -17,7 +17,7 @@ public class EnemyHealth : MonoBehaviour
     bool isSinking;
 
 
-    void Awake ()
+    void Awake()
     {
         // Mendapatkan reference component
         anim = GetComponent<Animator>();
@@ -35,7 +35,7 @@ public class EnemyHealth : MonoBehaviour
         if (isSinking)
         {
             // memindahkan object ke bawah
-            transform.Translate(Vector3.up * sinkSpeed * Time.deltaTime);
+            transform.Translate(-Vector3.up * sinkSpeed * Time.deltaTime);
         }
     }
 

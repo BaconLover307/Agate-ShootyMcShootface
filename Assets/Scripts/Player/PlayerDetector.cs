@@ -8,7 +8,7 @@ public class PlayerDetector : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Enemy" && !other.isTrigger)
+        if (other.tag == "Enemy" && other.isTrigger)
         {
             float enemyDistance = Vector3.Distance(transform.position, other.transform.position);
             gameOverManager.ShowWarning(enemyDistance);
