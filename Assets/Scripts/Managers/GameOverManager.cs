@@ -36,7 +36,11 @@ public class GameOverManager : MonoBehaviour
 
     public void ShowWarning(float enemyDistance)
     {
-        warningText.text = string.Format("! {0} m", Mathf.RoundToInt(enemyDistance));
-        anim.SetTrigger("Warning");
+        if (playerHealth.currentHealth > 0)
+        {
+            warningText.text = string.Format("! {0} m", Mathf.RoundToInt(enemyDistance));
+            anim.SetTrigger("Warning");
+
+        }
     }
 }
