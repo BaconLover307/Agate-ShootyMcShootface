@@ -10,7 +10,7 @@ public class EnemyFactory : MonoBehaviour, IFactory
 
     public GameObject FactoryMethod(int tag)
     {
-        GameObject enemy = Instantiate(enemyPrefab[tag]);
+        GameObject enemy = enemyPrefab[tag];
         return enemy;
     }
 }
