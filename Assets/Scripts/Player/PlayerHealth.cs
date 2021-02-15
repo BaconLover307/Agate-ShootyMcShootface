@@ -68,6 +68,12 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
+    public void setHealth(int health)
+    {
+        currentHealth = health;
+        healthSlider.value = currentHealth;
+    }
+
 
     void Death()
     {
@@ -86,7 +92,7 @@ public class PlayerHealth : MonoBehaviour
 
     public void RestartLevel()
     {
-        //meload ulang scene dengan index 0 pada build setting
-        SceneManager.LoadScene(0);
+        //meload ulang scene dengan index 0 pada build setting
+        SceneManager.LoadScene(0);
     }
 }

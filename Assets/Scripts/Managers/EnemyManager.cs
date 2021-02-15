@@ -14,25 +14,25 @@ public class EnemyManager : MonoBehaviour
     public MonoBehaviour factory;
     IFactory Factory { get { return factory as IFactory; } }
 
-    void Start ()
+    void Start()
     {
-        //Mengeksekusi fungs Spawn setiap beberapa detik sesui dengan nilai spawnTime
+        //Mengeksekusi fungsi Spawn setiap beberapa detik sesui dengan nilai spawnTime
         InvokeRepeating("Spawn", spawnTime, spawnTime);
     }
 
 
-    void Spawn ()
+    void Spawn()
     {
         if (playerHealth.currentHealth <= 0f)
         {
             return;
         }
 
-        int spawnPointIndex = Random.Range (0, spawnPoints.Length);
+        int spawnPointIndex = Random.Range(0, spawnPoints.Length);
 
         // Menduplikasi enemy
         Instantiate(Factory.FactoryMethod(spawnEnemy), spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation);
-        
+
 
     }
 }
