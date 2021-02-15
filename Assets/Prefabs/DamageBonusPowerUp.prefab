@@ -146,7 +146,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _duration: 10
   damageMultiplier: 2
-  GunBarrelEnd: {fileID: 0}
 --- !u!82 &2527310540376895277
 AudioSource:
   m_ObjectHideFlags: 0

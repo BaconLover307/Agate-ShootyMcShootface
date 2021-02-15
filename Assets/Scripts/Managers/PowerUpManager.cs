@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PowerUpManager : MonoBehaviour
 {
-    public enum PowerUpState { Start, Waiting, OnField }
+    public enum PowerUpState { Start, Waiting, OnField, Granted }
 
     private PowerUpState _state;
 
@@ -13,33 +13,34 @@ public class PowerUpManager : MonoBehaviour
 
     GameObject powerUp;
     public PlayerHealth playerHealth;
-    public float spawnTime = 30f;
-    public float intervalTime = 20f;
-    public float fieldTime = 10f;
+    public float spawnTime;
+    public float intervalTime;
+    public float fieldTime;
     public Transform[] spawnPoints;
 
     [SerializeField]
     public MonoBehaviour factory;
     IFactory Factory { get { return factory as IFactory; } }
 
-    void Start ()
-    {
-        //Mengeksekusi fungsi Spawn setiap beberapa detik sesui dengan nilai spawnTime
-        //InvokeRepeating("Spawn", spawnTime, spawnTime);
-    }
 
     void Update() {
         timer += Time.deltaTime;
 
         if (_state == PowerUpState.OnField && timer >= fieldTime) {
+            Destroy(powerUp, 0.5f);
+            powerUp = null;
             _state = PowerUpState.Waiting;
-            Destroy(powerUp);
             timer = 0f;
         }
         if ((_state == PowerUpState.Start && timer >= spawnTime) ||
             (_state == PowerUpState.Waiting && timer >= intervalTime)) {
             Spawn();
             _state = PowerUpState.OnField;
+            timer = 0f;
+        }
+        if (_state == PowerUpState.Granted && timer >= powerUpDuration) {
+            _state = PowerUpState.Waiting;
+            powerUpDuration = 0f;
             timer = 0f;
         }
 
@@ -56,8 +57,12 @@ public class PowerUpManager : MonoBehaviour
 
         // Mengenerate power up
         powerUp = Instantiate(Factory.FactoryMethod(spawnPowerUp), spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation);
-        _state = PowerUpState.Waiting;
-        timer = 0f;
 
+    }
+
+    public void GrantPowerUp(float duration) {
+        _state = PowerUpState.Granted;
+        powerUpDuration = duration;
+        timer = 0f;
     }
 }

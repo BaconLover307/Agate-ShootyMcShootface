@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PowerUp : MonoBehaviour
 {
-    public float _duration = 2f;
+    public float _duration;
     public float Duration
     {
         get { return _duration; }
@@ -15,10 +15,10 @@ public class PowerUp : MonoBehaviour
     MeshRenderer renderer;
     Animator anim;
     protected GameObject player;
-    EnemyHealth enemyHealth;
-    bool playerInRange;
+    GameObject manager;
+    PowerUpManager powerUpManager;
     float timer;
-    bool isGranted;
+    protected bool isGranted;
 
     AudioSource powerUpAudio;
 
@@ -26,11 +26,14 @@ public class PowerUp : MonoBehaviour
     void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        manager = GameObject.FindGameObjectWithTag("PowerUpManager");
+        powerUpManager = manager.GetComponent<PowerUpManager>();
         anim = GetComponent<Animator>();
         powerUpAudio = GetComponent<AudioSource>();
         renderer = GetComponent<MeshRenderer>();
         collider = GetComponent<SphereCollider>();
         light = GetComponent<Light>();
+        timer = 0f;
     }
 
     // Callback jika ada suatu object masuk ke dalam trigger
@@ -43,7 +46,7 @@ public class PowerUp : MonoBehaviour
             powerUpAudio.Play();
             Hide();
             isGranted = true;
-            //Destroy(gameObject);
+            powerUpManager.GrantPowerUp(_duration);
         }
     }
 
@@ -55,7 +58,7 @@ public class PowerUp : MonoBehaviour
             if (timer >= _duration)
             {
                 Reset();
-                Destroy(gameObject);
+                timer = 0;
             }
         }
 
@@ -76,5 +79,4 @@ public class PowerUp : MonoBehaviour
     {
         // Do nothing
     }
-
 }

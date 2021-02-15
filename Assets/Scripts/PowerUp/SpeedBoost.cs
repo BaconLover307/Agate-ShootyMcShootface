@@ -18,6 +18,7 @@ public class SpeedBoost : PowerUp
     public override void Reset()
     {
         playerMovement.setSpeed(startSpeed);
+        Destroy(gameObject, 2f);
     }
 
 }

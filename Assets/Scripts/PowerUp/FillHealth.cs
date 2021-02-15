@@ -14,6 +14,7 @@ public class FillHealth : PowerUp
 
     public override void Reset()
     {
+        Destroy(gameObject, 10f);
     }
 
 }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class InputHandler : MonoBehaviour
 {
+    public PlayerHealth playerHealth;
     public PlayerMovement playerMovement;
     public PlayerShooting playerShooting;
 
@@ -34,6 +35,10 @@ public class InputHandler : MonoBehaviour
 
     Command InputMovementHandling()
     {
+        if (playerHealth.isDead)
+        {
+            return null;
+        }
         //Check jika movement sesuai dengan key nya
         if (Input.GetKey(KeyCode.D))
         {
@@ -75,6 +80,10 @@ public class InputHandler : MonoBehaviour
 
     Command InputShootHandling()
     {
+        if (playerHealth.isDead)
+        {
+            return null;
+        }
         //Jika menembak trigger shoot command
         if (Input.GetButtonDown("Fire1"))
         {
